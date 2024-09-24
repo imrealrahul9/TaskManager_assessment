@@ -1,8 +1,8 @@
 package com.assignment.TaskManager.service;
 
-import com.assignment.TaskManager.entity.Task;
-import com.assignment.TaskManager.exception.TaskNotFoundException;
-import com.assignment.TaskManager.repository.TaskRepository;
+import com.assignment.TaskManager.entity.*;
+import com.assignment.TaskManager.exception.*;
+import com.assignment.TaskManager.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,17 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public Task createTask(Task task) {
-        // Perform any necessary validation here
-        // If validation fails, throw a ValidationException
+        // Validate that the assigned user exists
+        User assignedUser = userRepository.findById(task.getAssignedTo().getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        task.setAssignedTo(assignedUser);
         return taskRepository.save(task);
     }
+
 
     public List<Task> getAllTasks() {
         return taskRepository.findAll();

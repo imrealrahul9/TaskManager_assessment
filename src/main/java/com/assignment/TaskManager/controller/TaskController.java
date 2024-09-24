@@ -3,6 +3,7 @@ package com.assignment.TaskManager.controller;  // Adjust based on your package 
 import com.assignment.TaskManager.entity.Task;
 import com.assignment.TaskManager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,9 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
-        Task createdTask = taskService.createTask(task);
-        return ResponseEntity.ok(createdTask);
+        return new ResponseEntity<>(taskService.createTask(task), HttpStatus.CREATED);
     }
+
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {

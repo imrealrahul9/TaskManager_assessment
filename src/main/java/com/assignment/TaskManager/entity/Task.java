@@ -2,6 +2,7 @@ package com.assignment.TaskManager.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Entity
 public class Task {
@@ -12,10 +13,22 @@ public class Task {
 
     private String title;
     private String description;
+
+
+    @ManyToOne // Assuming a many-to-one relationship
+    @JoinColumn(name = "user_id", nullable = false) // Ensure this matches the foreign key column in the tasks table
+    private User assignedTo;
+
     private String status;
+
+
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private String timezone;
+
+
 
     @PrePersist
     protected void onCreate() {
@@ -34,6 +47,22 @@ public class Task {
         this.title = title;
         this.description = description;
         this.status = status;
+    }
+
+    public User getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(User assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(ZoneId timezone) {
+        this.timezone = String.valueOf(timezone);
     }
 
     public Long getId() {
