@@ -15,8 +15,8 @@ public class Task {
     private String description;
 
 
-    @ManyToOne // Assuming a many-to-one relationship
-    @JoinColumn(name = "user_id", nullable = false) // Ensure this matches the foreign key column in the tasks table
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User assignedTo;
 
     private String status;
