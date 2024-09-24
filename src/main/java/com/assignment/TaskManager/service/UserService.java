@@ -14,7 +14,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public User createUser(User user) {
-        // Perform any necessary validation here
+
         return userRepository.save(user);
     }
 

@@ -17,7 +17,6 @@ public class User {
 
     private boolean isActive;
 
-    // Getters and Setters
 
     public Long getId() {
         return id;

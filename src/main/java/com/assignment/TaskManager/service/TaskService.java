@@ -5,6 +5,7 @@ import com.assignment.TaskManager.exception.*;
 import com.assignment.TaskManager.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +19,20 @@ public class TaskService {
     @Autowired
     private UserRepository userRepository;
 
+    public Page<Task> getFilteredTasks(String status, Long userId, Pageable pageable) {
+        if (status != null && userId != null) {
+            return taskRepository.findByStatusAndAssignedToId(status, userId, pageable);
+        } else if (status != null) {
+            return taskRepository.findByStatus(status, pageable);
+        } else if (userId != null) {
+            return taskRepository.findByAssignedToId(userId, pageable);
+        } else {
+            return taskRepository.findAll(pageable);
+        }
+    }
+
     public Task createTask(Task task) {
-        // Validate that the assigned user exists
+        // Validate that the assigned user exists :)
         User assignedUser = userRepository.findById(task.getAssignedTo().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         task.setAssignedTo(assignedUser);

@@ -1,4 +1,4 @@
-package com.assignment.TaskManager.controller;  // Adjust based on your package name
+package com.assignment.TaskManager.controller;
 
 import com.assignment.TaskManager.entity.Task;
 import com.assignment.TaskManager.service.TaskService;
@@ -21,7 +21,6 @@ public class TaskController {
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         return new ResponseEntity<>(taskService.createTask(task), HttpStatus.CREATED);
     }
-
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
