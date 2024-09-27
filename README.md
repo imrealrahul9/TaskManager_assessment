@@ -1,11 +1,10 @@
 TaskManager Backend
 
-This is a Spring Boot application designed to manage tasks. It includes features such as task creation, task assignment to users, pagination, filtering, and sorting.
+This is a Spring Boot application designed to manage tasks. It includes features such as task creation, task assignment to users.
 
 Features
 
 CRUD operations for tasks and users.
-Pagination, filtering, and sorting for task retrieval.
 RESTful API integration.
 Timezone handling for task creation.
 Requirements
