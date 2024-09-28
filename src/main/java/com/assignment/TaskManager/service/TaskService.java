@@ -63,12 +63,4 @@ public class TaskService {
         taskRepository.delete(existingTask);
     }
 
-    public Page<Task> getTasks(int page, int size, String filter, String sort, String sortDirection) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sort));
-        if (filter != null && !filter.isEmpty()) {
-            return taskRepository.findByTitleContaining(filter, pageable);
-        }
-        return taskRepository.findAll(pageable);
-    }
-
 }
