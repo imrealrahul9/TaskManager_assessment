@@ -14,4 +14,7 @@ public enum TimeZone {
     }
 
 
+    public String getZoneId() {
+        return zoneId;
+    }
 }

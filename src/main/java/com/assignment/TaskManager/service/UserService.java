@@ -35,7 +35,7 @@ public class UserService {
         existingUser.setActive(user.isActive());
         return userRepository.save(existingUser);
     }
-
+    //delete
     public void deleteUser(Long id) {
         User existingUser = getUserById(id);
         userRepository.delete(existingUser);

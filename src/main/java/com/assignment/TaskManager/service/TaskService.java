@@ -31,7 +31,7 @@ public class TaskService {
     }
 
     public Task createTask(Task task) {
-        // Validate that the assigned user exists :)
+        // Validate that the assigned user exists :))
         User assignedUser = userRepository.findById(task.getAssignedTo().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         task.setAssignedTo(assignedUser);

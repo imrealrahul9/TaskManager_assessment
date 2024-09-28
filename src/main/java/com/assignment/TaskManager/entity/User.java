@@ -2,6 +2,7 @@ package com.assignment.TaskManager.entity;
 
 import jakarta.persistence.*;
 
+//user
 @Entity
 @Table(name = "users")
 public class User {
