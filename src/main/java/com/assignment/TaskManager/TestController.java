@@ -1,4 +1,4 @@
-package com.assignment.TaskManager;  // Same package as the main application
+package com.assignment.TaskManager;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

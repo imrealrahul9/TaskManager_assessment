@@ -4,6 +4,7 @@ import com.assignment.TaskManager.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.*;
+import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
@@ -14,4 +15,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     Page<Task> findByStatusAndAssignedToId(String status, Long userId, Pageable pageable);
 
+    Page<Task> findByTitleContaining(String filter, Pageable pageable);
 }

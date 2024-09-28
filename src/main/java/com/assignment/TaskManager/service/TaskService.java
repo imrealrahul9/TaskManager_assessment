@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -63,4 +62,13 @@ public class TaskService {
                 .orElseThrow(() -> new TaskNotFoundException(id));
         taskRepository.delete(existingTask);
     }
+
+    public Page<Task> getTasks(int page, int size, String filter, String sort, String sortDirection) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sort));
+        if (filter != null && !filter.isEmpty()) {
+            return taskRepository.findByTitleContaining(filter, pageable);
+        }
+        return taskRepository.findAll(pageable);
+    }
+
 }

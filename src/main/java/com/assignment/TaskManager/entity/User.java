@@ -13,7 +13,7 @@ public class User {
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    private TimeZone timezone; // Store as String
+    private TimeZone timezone;
 
     private boolean isActive;
 
