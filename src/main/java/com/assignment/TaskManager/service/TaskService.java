@@ -22,6 +22,17 @@ public class TaskService {
         // Validate that the assigned user exists :))
         User assignedUser = userRepository.findById(task.getAssignedTo().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if(task.getDescription().isEmpty()){
+            throw new ValidationException("Description cannot be empty");
+        }
+        if(task.getTitle().isEmpty()){
+            throw new ValidationException("Title cannot be empty");
+        }
+        if(!assignedUser.isActive()){
+            throw new ValidationException("Assigned to is not active");
+        }
+
         task.setAssignedTo(assignedUser);
         return taskRepository.save(task);
     }
@@ -42,9 +53,11 @@ public class TaskService {
         existingTask.setTitle(task.getTitle());
         existingTask.setDescription(task.getDescription());
         existingTask.setStatus(task.getStatus());
+        User assignedUser = userRepository.findById(task.getAssignedTo().getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        existingTask.setAssignedTo(assignedUser);
         return taskRepository.save(existingTask);
     }
-
     public void deleteTask(Long id) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
